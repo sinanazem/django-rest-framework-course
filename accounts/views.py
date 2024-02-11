@@ -1,14 +1,21 @@
-from django.shortcuts import render
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Person
-from .serializers import PersonSerializer
+from django.contrib.auth.models import User
+from .serializers import UserRegistrationSerializer
 
 
-class PersonView(APIView):
-    def get(self, request):
-        person = Person.objects.all()
-        ser_person = PersonSerializer(instance=person, many=True)
+class UserRegistrationView(APIView):
+    def post(self, request):
         
-        return Response(data = ser_person.data)
+        ser_user = UserRegistrationSerializer(data=request.POST)
+        if ser_user.is_valid():
+            User.objects.create_user(
+                username=ser_user._validated_data["username"],
+                email=ser_user._validated_data["email"],
+                password=ser_user._validated_data["password"],
+                
+                )
+        
+            return Response(data = ser_user.data)
+        return Response(data = ser_user.errors)
