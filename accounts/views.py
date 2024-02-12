@@ -11,11 +11,11 @@ class UserRegistrationView(APIView):
         ser_user = UserRegistrationSerializer(data=request.POST)
         if ser_user.is_valid():
             User.objects.create_user(
-                username=ser_user._validated_data["username"],
-                email=ser_user._validated_data["email"],
-                password=ser_user._validated_data["password"],
+                username=ser_user.validated_data["username"],
+                email=ser_user.validated_data["email"],
+                password=ser_user.validated_data["password"]
                 
                 )
         
-            return Response(data = ser_user.data)
-        return Response(data = ser_user.errors)
+            return Response(ser_user.data)
+        return Response(ser_user.errors)
