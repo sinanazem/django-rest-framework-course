@@ -28,6 +28,9 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             },
         }
     
+    def create(self, validated_data):
+        del validated_data['confirm_password']
+        return User.objects.create_user(**validated_data)
     
     def validate_username(self, value):
         
