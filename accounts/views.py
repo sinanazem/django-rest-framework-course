@@ -8,6 +8,7 @@ from rest_framework import viewsets
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
+
 class UserRegister(APIView):
     
     def post(self, request):
@@ -47,7 +48,7 @@ class UserViewset(viewsets.ViewSet):
             return Response(ser_data.data, status=status.HTTP_200_OK)
             
         return Response(ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     def destroy(self, request, pk):
         user = get_object_or_404(self.queryset, pk=pk)
         if request.user != user:
