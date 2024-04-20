@@ -14,7 +14,7 @@ This project is a Question and Answer system built using Django Rest Framework. 
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/qa-system-drf.git
+   git clone https://github.com/sinanazem/django-rest-framework-course.git
    ```
 2. Install dependencies:
    ```bash
